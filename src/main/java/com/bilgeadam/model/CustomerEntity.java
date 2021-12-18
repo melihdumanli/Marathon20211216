@@ -52,6 +52,9 @@ public class CustomerEntity implements Serializable {
 	@Column(name = "address")
 	private String address;
 
+	@Column(name = "gender")
+	private String gender;
+
 	@Column(name = "username")
 	private String username;
 

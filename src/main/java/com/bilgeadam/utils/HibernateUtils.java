@@ -22,6 +22,7 @@ public class HibernateUtils {
 			configuration.addAnnotatedClass(CustomerEntity.class);
 			configuration.addAnnotatedClass(OrderEntity.class);
 
+
 			SessionFactory factory = configuration.configure("hibernate.cfg.xml").buildSessionFactory();
 			return factory;
 		} catch (Exception e) {

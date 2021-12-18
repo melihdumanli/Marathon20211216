@@ -9,6 +9,8 @@ import com.bilgeadam.utils.HibernateUtils;
 import org.hibernate.Session;
 
 import javax.persistence.TypedQuery;
+import java.io.Serial;
+import java.io.Serializable;
 import java.util.Scanner;
 
 public class AdminCrudOperations {
@@ -148,6 +150,7 @@ public class AdminCrudOperations {
         switch (choice) {
             case 1 :
                 System.out.println("Lütfen Albüm Adını Giriniz:");
+                scanner.nextLine();
                 vinylEntity.setAlbumName(scanner.nextLine());
                 break;
             case 2 : System.out.println("Lütfen Albüm Türünü Giriniz (Örn: Pop, Rock, Metal):");
@@ -265,6 +268,7 @@ public class AdminCrudOperations {
         switch (choice) {
             case 1 -> {
                 System.out.println("Lütfen Albüm Adını Giriniz:");
+                scanner.nextLine();
                 dvdEntity.setAlbumName(scanner.nextLine());
             }
             case 2 -> {

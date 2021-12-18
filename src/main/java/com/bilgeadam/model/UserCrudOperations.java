@@ -66,6 +66,7 @@ public class UserCrudOperations {
         CustomerEntity customerEntity = new CustomerEntity();
         CustomerController customerController = new CustomerController();
         Session session = HibernateUtils.getSessionfactory().openSession();
+        session.getTransaction().begin();
 
         do {
             System.out.println("\n\n\tKullanıcı adınızı giriniz:");

@@ -61,15 +61,6 @@ public class VinylEntity implements Serializable {
     @JoinColumn(name = "artist_id")
     private ArtistEntity artist;
 
-    @OneToMany(mappedBy = "vinylAlbums")
-    private Collection<OrderEntity> orderEntity;
 
-    public Collection<OrderEntity> getOrderEntity() {
-        return orderEntity;
-    }
-
-    public void setOrderEntity(Collection<OrderEntity> orderEntity) {
-        this.orderEntity = orderEntity;
-    }
 }
 

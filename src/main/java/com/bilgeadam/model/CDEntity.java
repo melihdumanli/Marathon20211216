@@ -56,19 +56,4 @@ public class CDEntity implements Serializable {
     @JoinColumn(name = "artist_id", referencedColumnName = "id")
     private ArtistEntity artist;
 
-    @ToString.Exclude
-    @EqualsAndHashCode.Exclude
-    @OneToMany(mappedBy = "cdAlbum", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private Set<CDEntity> cdList = new HashSet<>();
-
-    @ToString.Exclude
-    @EqualsAndHashCode.Exclude
-    @OneToMany(mappedBy = "dvdAlbum", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private Set<DVDEntity> dvdList = new HashSet<>();
-
-    @ToString.Exclude
-    @EqualsAndHashCode.Exclude
-    @OneToMany(mappedBy = "vinylAlbum", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private Set<VinylEntity> vinylList = new HashSet<>();
-
 }

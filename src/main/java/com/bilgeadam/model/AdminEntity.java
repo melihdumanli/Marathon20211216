@@ -18,8 +18,8 @@ import lombok.*;
 
 @Entity
 @Table(name = "admins")
-public class AdminEntity implements Serializable {
-	private static final long serialVersionUID = 3745202571107295915L;
+public class AdminEntity {
+	//private static final long serialVersionUID = 3745202571107295915L;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
