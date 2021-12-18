@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #2D3447;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.bilgeadam.view.controller.AdminLoginController">
+    <children>
+        <TextField fx:id="username" layoutX="319.0" layoutY="246.0" prefHeight="30.0" prefWidth="200.0" promptText="Username">
+            <font>
+                <Font name="System Italic" size="14.0" />
+            </font>
+        </TextField>
+        <PasswordField fx:id="password" layoutX="319.0" layoutY="293.0" prefHeight="30.0" prefWidth="200.0" promptText="Password">
+            <font>
+                <Font name="System Italic" size="14.0" />
+            </font>
+        </PasswordField>
+        <Button fx:id="login" layoutX="320.0" layoutY="364.0" mnemonicParsing="false" onAction="#loginAction" prefHeight="30.0" prefWidth="200.0" style="-fx-background-color: #2196f3;" text="Login" textFill="WHITE" />
+        <CheckBox fx:id="rememberMe" layoutX="319.0" layoutY="337.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="200.0" text="Remember Me" textFill="#a0a2ab" />
+        <ImageView fitHeight="213.0" fitWidth="273.0" layoutX="313.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="C:\Users\melih\Pictures\Record Store-logos_transparent.png" />
+            </image>
+        </ImageView>
+        <ImageView fitHeight="25.0" fitWidth="23.0" layoutX="286.0" layoutY="250.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="C:\Users\melih\Pictures\user.png" />
+            </image>
+        </ImageView>
+        <ImageView fitHeight="25.0" fitWidth="23.0" layoutX="286.0" layoutY="297.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="D:\Projects\Java WorkSpace\Resources\Lock 2_64px.png" />
+            </image>
+        </ImageView>
+        <ImageView fx:id="progressBar" fitHeight="73.0" fitWidth="200.0" layoutX="320.0" layoutY="416.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="D:\Projects\Java WorkSpace\Resources\294-1.gif" />
+            </image>
+        </ImageView>
+      <Text fx:id="warning" fill="RED" layoutX="325.0" layoutY="431.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Wrong E-Mail or Password">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Text>
+      <Text fx:id="pta" fill="#1aff00" layoutX="361.0" layoutY="452.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Please Try Again">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Text>
+    </children>
+</AnchorPane>
