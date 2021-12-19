@@ -4,20 +4,27 @@ import com.bilgeadam.controller.ArtistController;
 import com.bilgeadam.controller.CustomerController;
 import com.bilgeadam.utils.BAUtils;
 import com.bilgeadam.utils.HibernateUtils;
+import com.bilgeadam.view.controller.LoginController;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.hibernate.Session;
 
 import javax.persistence.TypedQuery;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.UUID;
 
 public class UserCrudOperations {
     private static final Scanner scanner = new Scanner(System.in);
     private static final BAUtils baUtils = BAUtils.getInstance();
     private static final MenuItems menuItems = MenuItems.getInstance();
     private static final Logger logger = LogManager.getLogger(UserCrudOperations.class);
-    public static void userLoginScreen(){
+
+    /*public static void userLoginScreen() {
         int choice;
         do {
             System.out.println("Lütfen Yapmak İstediğiniz İşlemi Seçini: \n1.) Kullanıcı Girişi\n2.) Kullanıcı Kayıt\n3.) Çıkış");
@@ -37,7 +44,7 @@ public class UserCrudOperations {
         scanner.close();
 
 
-    }
+    }*/
 
     private static void userSignUp() {
         CustomerEntity customerEntity = new CustomerEntity();
@@ -59,34 +66,41 @@ public class UserCrudOperations {
         customerEntity.setAddress(scanner.nextLine());
         customerController.create(customerEntity);
         System.out.println("Kullanıcı Kayıt İşlemi Başarıyla Gerçekleştirildi.");
-        userSignIn();
+        //userSignIn();
     }
 
-    private static void userSignIn() {
-        CustomerEntity customerEntity = new CustomerEntity();
-        CustomerController customerController = new CustomerController();
+    public Boolean userSignIn(String username, String password) {
+        //CustomerEntity customerEntity = LoginController.customerEntity;
+        boolean isValid = false;
+        //CustomerController customerController = new CustomerController();
         Session session = HibernateUtils.getSessionfactory().openSession();
         session.getTransaction().begin();
 
-        do {
-            System.out.println("\n\n\tKullanıcı adınızı giriniz:");
+        //do {
+            /*System.out.println("\n\n\tKullanıcı adınızı giriniz:");
+            scanner.nextLine();
             customerEntity.setUsername(scanner.nextLine());
             System.out.println("\tŞifrenizi giriniz:");
-            customerEntity.setPassword(scanner.nextLine());
+            customerEntity.setPassword(scanner.nextLine())*/;
 
             TypedQuery<CustomerEntity> query = session.createQuery("select c from CustomerEntity as c where username = :key1 and password = :key2", CustomerEntity.class);
-            query.setParameter("key1", customerEntity.getUsername());
-            query.setParameter("key2", customerEntity.getPassword());
+            query.setParameter("key1", username);
+            query.setParameter("key2", password);
             try {
-                customerEntity = query.getSingleResult();
-            }catch (Exception e){
+                LoginController.customerEntity = query.getSingleResult();
+            } catch (Exception e) {
                 System.out.println("\n\n\tKullanıcı adı veya şifre hatalı");
                 System.out.println("\tLütfen tekrar deneyiniz");
             }
-        } while (customerEntity.getId() == 0);
-        System.out.println("\n\n\tHoşgeldiniz " + customerEntity.getUsername());
+        //} while (customerEntity.getId() == 0);
+        /*System.out.println("\n\n\tHoşgeldiniz " + customerEntity.getUsername());
         userPanel();
-        scanner.close();
+        scanner.close();*/
+        if (LoginController.customerEntity.getUsername() != null && LoginController.customerEntity.getPassword() != null) {
+            isValid = true;
+        } else
+            isValid = false;
+        return isValid;
     }
 
     private static void userPanel() {
@@ -127,8 +141,6 @@ public class UserCrudOperations {
     private static void listAlbumsByOrderCount() {
 
     }
-
-
 
     private static void listAlbumsByGenres() {
         System.out.println("\n\n\tLütfen Albüm Türünü Giriniz:");
@@ -239,5 +251,27 @@ public class UserCrudOperations {
             logger.info(temp);
         }
         userPanel();
+    }
+
+    public void verCodeGenerator() {
+        UUID uuid = UUID.randomUUID();
+        try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter("C:\\bilgeadam\\verification.txt"))) {
+            bufferedWriter.write(uuid.toString());
+            bufferedWriter.flush();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public Boolean verCodeChecker(String verCode) {
+        try (BufferedReader bufferedReader = new BufferedReader(new FileReader("C:\\bilgeadam\\verification.txt"))) {
+            String temp = bufferedReader.readLine();
+            if (temp.equals(verCode)) {
+                return true;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 }

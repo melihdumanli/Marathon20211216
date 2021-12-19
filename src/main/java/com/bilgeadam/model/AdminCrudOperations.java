@@ -9,8 +9,6 @@ import com.bilgeadam.utils.HibernateUtils;
 import org.hibernate.Session;
 
 import javax.persistence.TypedQuery;
-import java.io.Serial;
-import java.io.Serializable;
 import java.util.Scanner;
 
 public class AdminCrudOperations {
@@ -31,7 +29,7 @@ public class AdminCrudOperations {
     Scanner scanner = new Scanner(System.in);
     BAUtils baUtils = BAUtils.getInstance();
 
-    public void showMainMenu() {
+    /*public void showMainMenu() {
 
         int choice;
         do {
@@ -51,33 +49,40 @@ public class AdminCrudOperations {
             default -> throw new IllegalStateException("Unexpected value: " + choice);
         }
         scanner.close();
-    }
+    }*/
 
-    private void adminLoginScreen() {
-        Scanner scanner = new Scanner(System.in);
+    public Boolean adminLoginScreen(String username, String password) {
+        //Scanner scanner = new Scanner(System.in);
         AdminEntity adminEntity = new AdminEntity();
-        adminEntity.setId(0);
+        Boolean isAdmin = false;
+        //adminEntity.setId(0);
         Session session = HibernateUtils.getSessionfactory().openSession();
 
-        do {
-            System.out.println("\n\n\tKullanıcı adınızı giriniz:");
-            adminEntity.setUsername(scanner.nextLine());
-            System.out.println("\tŞifrenizi giriniz:");
-            adminEntity.setPassword(scanner.nextLine());
+        //do {
+            //System.out.println("\n\n\tKullanıcı adınızı giriniz:");
+            //adminEntity.setUsername(username);
+            //System.out.println("\tŞifrenizi giriniz:");
+            //adminEntity.setPassword(password);
 
             TypedQuery<AdminEntity> query = session.createQuery("select a from AdminEntity as a where username = :key1 and password = :key2", AdminEntity.class);
-            query.setParameter("key1", adminEntity.getUsername());
-            query.setParameter("key2", adminEntity.getPassword());
+            query.setParameter("key1", username);
+            query.setParameter("key2", password);
             try {
                 adminEntity = query.getSingleResult();
             }catch (Exception e){
                 System.out.println("\n\n\tKullanıcı adı veya şifre hatalı");
                 System.out.println("\tLütfen tekrar deneyiniz");
             }
-        } while (adminEntity.getId() == 0);
-        System.out.println("\n\n\tHoşgeldiniz " + adminEntity.getUsername());
-        adminPanel();
-        scanner.close();
+        //} while (adminEntity.getId() == 0);
+        //System.out.println("\n\n\tHoşgeldiniz " + adminEntity.getUsername());
+        //adminPanel();
+        //scanner.close();
+        if (adminEntity.getId() != 0) {
+            isAdmin = true;
+        } else {
+            isAdmin = false;
+        }
+        return isAdmin;
     }
 
     private void adminPanel() {

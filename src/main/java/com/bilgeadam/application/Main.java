@@ -1,4 +1,4 @@
-package com.bilgeadam.view.application;
+package com.bilgeadam.application;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -7,6 +7,8 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class Main extends Application {
+    private static Stage pStage;
+
     public static void main(String[] args) {
         launch(args);
     }
@@ -14,6 +16,8 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         initLayout(primaryStage);
+        primaryStage.setTitle("Record Store");
+        pStage = primaryStage;
     }
 
     private void initLayout(Stage primaryStage) {
@@ -28,8 +32,7 @@ public class Main extends Application {
         }
     }
 
-    /*public static Stage getStage(){
-        return (Stage) Main.getPrimaryStage().getScene().getWindow();
-    }*/
-
+    public Stage getPrimaryStage(){
+        return pStage;
+    }
 }

@@ -1,6 +1,6 @@
 package com.bilgeadam.view.controller;
 
-import com.bilgeadam.controller.CustomerController;
+import com.bilgeadam.application.Main;
 import com.bilgeadam.model.CustomerEntity;
 import javafx.animation.PauseTransition;
 import javafx.event.ActionEvent;
@@ -58,8 +58,7 @@ public class SignUpController implements Initializable {
     @FXML
     private TextField username;
 
-    private CustomerEntity customer;
-    private CustomerController customerController;
+    public static CustomerEntity customer;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -69,7 +68,7 @@ public class SignUpController implements Initializable {
     }
 
     @FXML
-    public void signUp(ActionEvent event1) {
+    public void signUp(ActionEvent event1) throws IOException {
         PauseTransition delay = new PauseTransition(Duration.seconds(0.5));
         delay.play();
 
@@ -82,18 +81,26 @@ public class SignUpController implements Initializable {
         customer.setPhone(phone.getText());
         customer.setAddress(address.getText());
         customer.setGender(getGender());
-        customerController = new CustomerController();
-        customerController.create(customer);
+        /*customerController = new CustomerController();
+        customerController.create(customer);*/
 
+        signupButton.getScene().getWindow().hide();
+        Main main = new Main();
+        Stage verificationStage = main.getPrimaryStage();
+        verificationStage.setTitle("Verification");
+        Parent root = FXMLLoader.load(getClass().getResource("../Verification.fxml"));
+        verificationStage.setScene(new Scene(root));
+        verificationStage.show();
+        verificationStage.setResizable(false);
     }
 
     @FXML
     public void login(ActionEvent event2) throws IOException {
         signupButton.getScene().getWindow().hide();
-
-        Stage loginStage = new Stage();
+        Main main = new Main();
+        Stage loginStage = main.getPrimaryStage();
         loginStage.setTitle("Login");
-        Parent root = FXMLLoader.load(getClass().getResource("../Login.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("../../Login.fxml"));
         loginStage.setScene(new Scene(root));
         loginStage.show();
         loginStage.setResizable(false);

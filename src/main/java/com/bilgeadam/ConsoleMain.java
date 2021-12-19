@@ -12,6 +12,6 @@ public class ConsoleMain {
 
     public static void main(String[] args) {
         baUtils.header("Müzik Markete Hoşgeldiniz");
-        adminCrudOperations.showMainMenu();
+        //adminCrudOperations.showMainMenu();
     }
 }
