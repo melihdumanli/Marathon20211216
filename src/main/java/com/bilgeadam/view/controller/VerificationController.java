@@ -16,9 +16,9 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDateTime;
 import java.util.ResourceBundle;
 
-import static com.bilgeadam.view.controller.SignUpController.customer;
 
 public class VerificationController implements Initializable {
 
@@ -44,12 +44,14 @@ public class VerificationController implements Initializable {
         do {
             if(check){
                 customerController = new CustomerController();
-                customerController.create(customer);
+                LoginController.customerEntity.setLogDate(LocalDateTime.now());
+                LoginController.customerEntity.setActive(true);
+                customerController.create(LoginController.customerEntity);
                 submit.getScene().getWindow().hide();
                 Main main = new Main();
                 Stage userStage = main.getPrimaryStage();
                 userStage.setTitle("UserHomePage");
-                Parent root = FXMLLoader.load(getClass().getResource("../UserHomePage.fxml"));
+                Parent root = FXMLLoader.load(getClass().getResource("../fxml/UserHomePage.fxml"));
                 userStage.setScene(new Scene(root));
                 userStage.show();
                 userStage.setResizable(false);

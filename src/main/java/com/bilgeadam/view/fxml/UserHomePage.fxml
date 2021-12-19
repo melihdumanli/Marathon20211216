@@ -19,7 +19,7 @@
          <children>
             <ImageView fitHeight="200.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="C:\Users\melih\Pictures\Record Store-logos_transparent.png" />
+                  <Image url="C:\images\Record Store-logos_transparent.jpeg" />
                </image>
             </ImageView>
             <AnchorPane layoutY="168.0" prefHeight="101.0" prefWidth="200.0">
@@ -64,7 +64,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Button fx:id="showArtist" layoutX="35.0" layoutY="371.0" mnemonicParsing="false" onMouseEntered="#showArtistsUnderline" onMouseExited="#showArtistDelUnderline" style="-fx-background-color: #2D3447;" text="Show Artists" textFill="WHITE">
+            <Button fx:id="showArtist" layoutX="35.0" layoutY="371.0" mnemonicParsing="false" onAction="#underConstruction" onMouseEntered="#showArtistsUnderline" onMouseExited="#showArtistDelUnderline" style="-fx-background-color: #2D3447;" text="Show Artists" textFill="WHITE">
                <font>
                   <Font name="Leelawadee Bold" size="18.0" />
                </font>
@@ -72,7 +72,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Button fx:id="myCart" layoutX="55.0" layoutY="408.0" mnemonicParsing="false" onMouseEntered="#myCartUnderline" onMouseExited="#myCartDelUnderline" style="-fx-background-color: #2D3447;" text="My Cart" textFill="WHITE">
+            <Button fx:id="myCart" layoutX="55.0" layoutY="408.0" mnemonicParsing="false" onAction="#underConstruction" onMouseEntered="#myCartUnderline" onMouseExited="#myCartDelUnderline" style="-fx-background-color: #2D3447;" text="My Cart" textFill="WHITE">
                <font>
                   <Font name="Leelawadee Bold" size="18.0" />
                </font>
@@ -80,7 +80,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Button fx:id="exit" layoutX="59.0" layoutY="547.0" mnemonicParsing="false" onAction="#exit" onMouseEntered="#exitUnderline" onMouseExited="#exitDelUnderline" prefHeight="25.0" prefWidth="82.0" style="-fx-background-color: #5a6990; -fx-border-color: #ffffff;" text="Exit" textFill="WHITE">
+            <Button fx:id="exit" layoutX="59.0" layoutY="537.0" mnemonicParsing="false" onAction="#exit" onMouseEntered="#exitUnderline" onMouseExited="#exitDelUnderline" prefHeight="25.0" prefWidth="82.0" style="-fx-background-color: #5a6990; -fx-border-color: #ffffff;" text="Exit" textFill="WHITE">
                <font>
                   <Font size="14.0" />
                </font>
@@ -89,6 +89,7 @@
             <Line endX="100.0" layoutX="100.0" layoutY="279.0" startX="-100.0" stroke="WHITE" />
             <Line endX="100.0" layoutX="100.0" layoutY="168.0" startX="-100.0" stroke="WHITE" />
             <Label fx:id="cartCounter" alignment="CENTER" layoutX="148.0" layoutY="417.0" prefHeight="17.0" prefWidth="25.0" style="-fx-background-color: #2196f3;" text="0" textAlignment="CENTER" textFill="WHITE" />
+            <Label layoutX="52.0" layoutY="569.0" text="db provider ©ybg" textFill="WHITE" />
          </children>
       </Pane>
       <AnchorPane layoutX="200.0" prefHeight="600.0" prefWidth="600.0">
@@ -111,7 +112,7 @@
                         <Reflection bottomOpacity="0.12" fraction="0.55" topOpacity="0.25" />
                      </effect>
                   </Text>
-                  <Text fill="#4f7de8" layoutX="132.0" layoutY="262.0" strokeType="OUTSIDE" strokeWidth="0.0" text="The Menu On The Left Side" textAlignment="CENTER" wrappingWidth="336.0234375">
+                  <Text fill="#4f7de8" layoutX="132.0" layoutY="256.0" strokeType="OUTSIDE" strokeWidth="0.0" text="The Menu On The Left Side" textAlignment="CENTER" wrappingWidth="336.0234375">
                      <font>
                         <Font name="Californian FB" size="24.0" />
                      </font>

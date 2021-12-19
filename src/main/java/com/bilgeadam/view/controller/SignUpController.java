@@ -2,7 +2,6 @@ package com.bilgeadam.view.controller;
 
 import com.bilgeadam.application.Main;
 import com.bilgeadam.model.CustomerEntity;
-import javafx.animation.PauseTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -11,7 +10,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
-import javafx.util.Duration;
 
 import java.io.IOException;
 import java.net.URL;
@@ -58,8 +56,6 @@ public class SignUpController implements Initializable {
     @FXML
     private TextField username;
 
-    public static CustomerEntity customer;
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         name.setStyle("-fx-text-inner-color: #a0a2ab;");
@@ -69,26 +65,21 @@ public class SignUpController implements Initializable {
 
     @FXML
     public void signUp(ActionEvent event1) throws IOException {
-        PauseTransition delay = new PauseTransition(Duration.seconds(0.5));
-        delay.play();
-
-        customer = new CustomerEntity();
-        customer.setName(name.getText());
-        customer.setSurname(surname.getText());
-        customer.setUsername(username.getText());
-        customer.setPassword(password.getText());
-        customer.setEmail(email.getText());
-        customer.setPhone(phone.getText());
-        customer.setAddress(address.getText());
-        customer.setGender(getGender());
-        /*customerController = new CustomerController();
-        customerController.create(customer);*/
+        LoginController.customerEntity = new CustomerEntity();
+        LoginController.customerEntity.setName(name.getText());
+        LoginController.customerEntity.setSurname(surname.getText());
+        LoginController.customerEntity.setUsername(username.getText());
+        LoginController.customerEntity.setPassword(password.getText());
+        LoginController.customerEntity.setEmail(email.getText());
+        LoginController.customerEntity.setPhone(phone.getText());
+        LoginController.customerEntity.setAddress(address.getText());
+        LoginController.customerEntity.setGender(getGender());
 
         signupButton.getScene().getWindow().hide();
         Main main = new Main();
         Stage verificationStage = main.getPrimaryStage();
         verificationStage.setTitle("Verification");
-        Parent root = FXMLLoader.load(getClass().getResource("../Verification.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("../fxml/Verification.fxml"));
         verificationStage.setScene(new Scene(root));
         verificationStage.show();
         verificationStage.setResizable(false);

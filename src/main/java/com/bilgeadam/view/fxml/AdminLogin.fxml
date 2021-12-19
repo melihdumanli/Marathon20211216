@@ -28,22 +28,22 @@
         <CheckBox fx:id="rememberMe" layoutX="319.0" layoutY="337.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="200.0" text="Remember Me" textFill="#a0a2ab" />
         <ImageView fitHeight="213.0" fitWidth="273.0" layoutX="313.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true">
             <image>
-                <Image url="C:\Users\melih\Pictures\Record Store-logos_transparent.png" />
+                <Image url="C:\images\Record Store-logos_transparent.jpeg" />
             </image>
         </ImageView>
         <ImageView fitHeight="25.0" fitWidth="23.0" layoutX="286.0" layoutY="250.0" pickOnBounds="true" preserveRatio="true">
             <image>
-                <Image url="C:\Users\melih\Pictures\user.png" />
+                <Image url="C:\images\Contacts_52px.jpg" />
             </image>
         </ImageView>
         <ImageView fitHeight="25.0" fitWidth="23.0" layoutX="286.0" layoutY="297.0" pickOnBounds="true" preserveRatio="true">
             <image>
-                <Image url="D:\Projects\Java WorkSpace\Resources\Lock 2_64px.png" />
+                <Image url="C:\images\Lock 2_64px.jpg" />
             </image>
         </ImageView>
         <ImageView fx:id="progressBar" fitHeight="73.0" fitWidth="200.0" layoutX="320.0" layoutY="416.0" pickOnBounds="true" preserveRatio="true">
             <image>
-                <Image url="D:\Projects\Java WorkSpace\Resources\294-1.gif" />
+                <Image url="C:\images\294-1.gif" />
             </image>
         </ImageView>
     </children>

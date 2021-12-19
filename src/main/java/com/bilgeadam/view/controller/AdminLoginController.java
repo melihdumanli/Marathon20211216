@@ -79,7 +79,7 @@ public class AdminLoginController implements Initializable {
             login.getScene().getWindow().hide();
             Main main = new Main();
             Stage adminStage = main.getPrimaryStage();
-            Parent root = FXMLLoader.load(getClass().getResource("../AdminHome.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("../fxml/AdminHomePage.fxml"));
             Scene scene = new Scene(root);
             adminStage.setScene(scene);
             adminStage.show();
@@ -92,7 +92,7 @@ public class AdminLoginController implements Initializable {
         login.getScene().getWindow().hide();
         Main main = new Main();
         Stage adminStage = main.getPrimaryStage();
-        Parent root = FXMLLoader.load(getClass().getResource("../SignUP.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("../fxml/SignUp.fxml"));
         Scene scene = new Scene(root);
         adminStage.setScene(scene);
         adminStage.show();

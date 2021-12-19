@@ -1,21 +1,16 @@
 package com.bilgeadam.view.controller;
 
-import com.bilgeadam.application.Main;
 import javafx.animation.FadeTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
-import javafx.stage.Stage;
 import javafx.util.Duration;
 
 import java.io.IOException;
@@ -28,6 +23,7 @@ public class UserHomePageController implements Initializable {
     private AnchorPane holderPane;
 
     AnchorPane showAlbumsPane;
+    AnchorPane underConstructionPane;
 
     @FXML
     private Label cartCounter;
@@ -49,14 +45,14 @@ public class UserHomePageController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        welcomeText.setText("Welcome, " + LoginController.customerEntity.getName() + " " + LoginController.customerEntity.getSurname() +  ".");
+            welcomeText.setText("Welcome, " + LoginController.customerEntity.getName() + " " + LoginController.customerEntity.getSurname() +  ".");
 
     }
 
     @FXML
     public void showAlbumsAction(ActionEvent event) throws IOException {
         try {
-            showAlbumsPane = FXMLLoader.load(getClass().getResource("../UserHome.fxml"));
+            showAlbumsPane = FXMLLoader.load(getClass().getResource("../fxml/UserHome.fxml"));
             setNode(showAlbumsPane);
         } catch (IOException e) {
             e.printStackTrace();
@@ -119,5 +115,15 @@ public class UserHomePageController implements Initializable {
     @FXML
     public void exit(ActionEvent event) throws IOException {
         System.exit(0);
+    }
+
+    @FXML
+    void underConstruction(ActionEvent event) {
+        try {
+            underConstructionPane = FXMLLoader.load(getClass().getResource("../fxml/UnderConstruction.fxml"));
+            setNode(underConstructionPane);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

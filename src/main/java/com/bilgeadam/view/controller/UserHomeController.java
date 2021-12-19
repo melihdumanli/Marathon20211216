@@ -1,11 +1,17 @@
 package com.bilgeadam.view.controller;
 
+import javafx.animation.FadeTransition;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.effect.Reflection;
 import javafx.scene.input.MouseEvent;
+import javafx.util.Duration;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.Ref;
 import java.util.ResourceBundle;

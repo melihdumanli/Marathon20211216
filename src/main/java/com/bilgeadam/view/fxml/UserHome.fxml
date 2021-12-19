@@ -22,7 +22,7 @@
             </Button>
             <ImageView fitHeight="133.0" fitWidth="182.0" layoutX="83.0" layoutY="19.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="C:\Users\melih\Pictures\cdalbum.jpg" />
+                  <Image url="C:\images\cdalbum.jpg" />
                </image>
             </ImageView>
             <Button fx:id="dvdButton" alignment="BOTTOM_CENTER" layoutX="326.0" layoutY="14.0" mnemonicParsing="false" onMouseEntered="#setDvdButtonEffects" onMouseExited="#delDvdButtonEffects" prefHeight="160.0" prefWidth="210.0" style="-fx-background-color: #2D3447;" text="DVD" textFill="WHITE">
@@ -35,7 +35,7 @@
             </Button>
             <ImageView fitHeight="133.0" fitWidth="194.0" layoutX="355.0" layoutY="19.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="C:\Users\melih\Pictures\dvd.jpg" />
+                  <Image url="C:\images\dvd.jpg" />
                </image>
             </ImageView>
             <Button fx:id="vinylButton" alignment="BOTTOM_CENTER" layoutX="193.0" layoutY="238.0" mnemonicParsing="false" onMouseEntered="#setVinylButtonEffects" onMouseExited="#delVinylButtonEffects" prefHeight="160.0" prefWidth="210.0" style="-fx-background-color: #2D3447;" text="VINYL" textFill="WHITE">
@@ -48,7 +48,7 @@
             </Button>
             <ImageView fitHeight="133.0" fitWidth="182.0" layoutX="216.0" layoutY="243.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="C:\Users\melih\Pictures\vinyl.jpg" />
+                  <Image url="C:\images\Vinyl.jpg" />
                </image>
             </ImageView>
          </children>

@@ -89,8 +89,8 @@ public class UserCrudOperations {
             try {
                 LoginController.customerEntity = query.getSingleResult();
             } catch (Exception e) {
-                System.out.println("\n\n\tKullanıcı adı veya şifre hatalı");
-                System.out.println("\tLütfen tekrar deneyiniz");
+                /*System.out.println("\n\n\tKullanıcı adı veya şifre hatalı");
+                System.out.println("\tLütfen tekrar deneyiniz");*/
             }
         //} while (customerEntity.getId() == 0);
         /*System.out.println("\n\n\tHoşgeldiniz " + customerEntity.getUsername());
