@@ -1,7 +1,6 @@
 package com.bilgeadam.model;
 
-import com.bilgeadam.controller.ArtistController;
-import com.bilgeadam.controller.CustomerController;
+import com.bilgeadam.controller.*;
 import com.bilgeadam.utils.BAUtils;
 import com.bilgeadam.utils.HibernateUtils;
 import com.bilgeadam.view.controller.LoginController;
@@ -17,6 +16,8 @@ import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.UUID;
+
+import static com.bilgeadam.view.controller.LoginController.customerEntity;
 
 public class UserCrudOperations {
     private static final Scanner scanner = new Scanner(System.in);
@@ -70,13 +71,11 @@ public class UserCrudOperations {
     }
 
     public static void userLoginScreen() {
-        CustomerEntity customerEntity = LoginController.customerEntity;
         Session session = HibernateUtils.getSessionfactory().openSession();
         session.getTransaction().begin();
 
         do {
             System.out.println("\n\n\tKullanıcı adınızı giriniz:");
-            scanner.nextLine();
             customerEntity.setUsername(scanner.nextLine());
             System.out.println("\tŞifrenizi giriniz:");
             customerEntity.setPassword(scanner.nextLine());
@@ -85,14 +84,13 @@ public class UserCrudOperations {
         query.setParameter("key1", customerEntity.getUsername());
         query.setParameter("key2", customerEntity.getPassword());
         try {
-            LoginController.customerEntity = query.getSingleResult();
+            customerEntity = query.getSingleResult();
         } catch (Exception e) {
                 System.out.println("\n\n\tKullanıcı adı veya şifre hatalı");
                 System.out.println("\tLütfen tekrar deneyiniz");
         }
         } while (customerEntity.getId() == 0);
         System.out.println("\n\n\tHoşgeldiniz " + customerEntity.getUsername());
-        scanner.close();
         userPanel();
     }
 
@@ -114,7 +112,7 @@ public class UserCrudOperations {
             query.setParameter("key1", username);
             query.setParameter("key2", password);
             try {
-                LoginController.customerEntity = query.getSingleResult();
+                customerEntity = query.getSingleResult();
             } catch (Exception e) {
                 /*System.out.println("\n\n\tKullanıcı adı veya şifre hatalı");
                 System.out.println("\tLütfen tekrar deneyiniz");*/
@@ -123,7 +121,7 @@ public class UserCrudOperations {
         /*System.out.println("\n\n\tHoşgeldiniz " + customerEntity.getUsername());
         userPanel();
         scanner.close();*/
-        if (LoginController.customerEntity.getUsername() != null && LoginController.customerEntity.getPassword() != null) {
+        if (customerEntity.getUsername() != null && customerEntity.getPassword() != null) {
             isValid = true;
         } else
             isValid = false;
@@ -177,7 +175,7 @@ public class UserCrudOperations {
             String hql1 = "select c.albumGenre from CDEntity as c where c.albumGenre = :key1";
             TypedQuery<CDEntity> query1 = session.createQuery(hql1, CDEntity.class);
             query1.setParameter("key1", genre);
-            ArrayList<CDEntity> cdEntities = (ArrayList<CDEntity>) query1.getResultList();
+            ArrayList<CDEntity> cdEntities = (ArrayList<CDEntity>) query1.setFirstResult(0).setMaxResults(10).getResultList();
             for (CDEntity temp : cdEntities) {
                 logger.info(temp);
             }
@@ -185,7 +183,7 @@ public class UserCrudOperations {
             String hql2 = "select d.albumGenre from DVDEntity as d where d.albumGenre = :key1";
             TypedQuery<DVDEntity> query2 = session.createQuery(hql2, DVDEntity.class);
             query2.setParameter("key1", genre);
-            ArrayList<DVDEntity> dvdEntities = (ArrayList<DVDEntity>) query2.getResultList();
+            ArrayList<DVDEntity> dvdEntities = (ArrayList<DVDEntity>) query2.setFirstResult(0).setMaxResults(10).getResultList();
             for (DVDEntity temp : dvdEntities) {
                 logger.info(temp);
             }
@@ -193,7 +191,7 @@ public class UserCrudOperations {
             String hql3 = "select v.albumGenre from VinylEntity as v where v.albumGenre = :key1";
             TypedQuery<VinylEntity> query3 = session.createQuery(hql3, VinylEntity.class);
             query3.setParameter("key1", genre);
-            ArrayList<VinylEntity> vinylEntities = (ArrayList<VinylEntity>) query3.getResultList();
+            ArrayList<VinylEntity> vinylEntities = (ArrayList<VinylEntity>) query3.setFirstResult(0).setMaxResults(10).getResultList();
             for (VinylEntity temp : vinylEntities) {
                 logger.info(temp);
             }
@@ -206,23 +204,23 @@ public class UserCrudOperations {
 
     private static void listDiscountedAlbum() {
         Session session = HibernateUtils.getSessionfactory().openSession();
-        String hql1 = "select c from CDEntity as c order by d.discount desc ,limit (5)";
+        String hql1 = "select c from CDEntity as c order by c.discount desc";
         TypedQuery<CDEntity> query1 = session.createQuery(hql1, CDEntity.class);
-        ArrayList<CDEntity> cdEntities = (ArrayList<CDEntity>) query1.getResultList();
+        ArrayList<CDEntity> cdEntities = (ArrayList<CDEntity>) query1.setFirstResult(0).setMaxResults(10).getResultList();
         for (CDEntity temp : cdEntities) {
             logger.info(temp);
         }
 
-        String hql2 = "select d from DVDEntity as d order by d.discount desc, limit (5)";
+        String hql2 = "select d from DVDEntity as d order by d.discount desc";
         TypedQuery<DVDEntity> query2 = session.createQuery(hql2, DVDEntity.class);
-        ArrayList<DVDEntity> dvdEntities = (ArrayList<DVDEntity>) query2.getResultList();
+        ArrayList<DVDEntity> dvdEntities = (ArrayList<DVDEntity>) query2.setFirstResult(0).setMaxResults(10).getResultList();
         for (DVDEntity temp : dvdEntities) {
             logger.info(temp);
         }
 
-        String hql3 = "select v from VinylEntity as v order by v.discount desc, limit (5)";
+        String hql3 = "select v from VinylEntity as v order by v.discount desc";
         TypedQuery<VinylEntity> query3 = session.createQuery(hql3, VinylEntity.class);
-        ArrayList<VinylEntity> vinylEntities = (ArrayList<VinylEntity>) query3.getResultList();
+        ArrayList<VinylEntity> vinylEntities = (ArrayList<VinylEntity>) query3.setFirstResult(0).setMaxResults(10).getResultList();
         for (VinylEntity temp : vinylEntities) {
             logger.info(temp);
         }
@@ -230,24 +228,30 @@ public class UserCrudOperations {
     }
 
     private static void listLastAddedAlbums() {
+        /*CdController cdController = new CdController();
+        DvdController dvdController = new DvdController();
+        VinylController vinylController = new VinylController();
+        cdController.list();
+        dvdController.list();
+        vinylController.list();*/
         Session session = HibernateUtils.getSessionfactory().openSession();
-        String hql1 = "select c from CDEntity as c order by d.id desc, limit (5)";
+        String hql1 = "select c from CDEntity as c order by c.id desc";
         TypedQuery<CDEntity> query1 = session.createQuery(hql1, CDEntity.class);
-        ArrayList<CDEntity> cdEntities = (ArrayList<CDEntity>) query1.getResultList();
+        ArrayList<CDEntity> cdEntities = (ArrayList<CDEntity>) query1.setFirstResult(0).setMaxResults(10).getResultList();
         for (CDEntity temp : cdEntities) {
             logger.info(temp);
         }
 
-        String hql2 = "select d from DVDEntity as d order by d.id desc, limit (5)";
+        String hql2 = "select d from DVDEntity as d order by d.id desc";
         TypedQuery<DVDEntity> query2 = session.createQuery(hql2, DVDEntity.class);
-        ArrayList<DVDEntity> dvdEntities = (ArrayList<DVDEntity>) query2.getResultList();
+        ArrayList<DVDEntity> dvdEntities = (ArrayList<DVDEntity>) query2.setFirstResult(0).setMaxResults(10).getResultList();
         for (DVDEntity temp : dvdEntities) {
             logger.info(temp);
         }
 
-        String hql3 = "select v from VinylEntity as v order by v.id desc, limit (5)";
+        String hql3 = "select v from VinylEntity as v order by v.id desc";
         TypedQuery<VinylEntity> query3 = session.createQuery(hql3, VinylEntity.class);
-        ArrayList<VinylEntity> vinylEntities = (ArrayList<VinylEntity>) query3.getResultList();
+        ArrayList<VinylEntity> vinylEntities = (ArrayList<VinylEntity>) query3.setFirstResult(0).setMaxResults(10).getResultList();
         for (VinylEntity temp : vinylEntities) {
             logger.info(temp);
         }
@@ -257,23 +261,23 @@ public class UserCrudOperations {
     private static void listAlbumsByArtist() {
         ArtistController artistController = new ArtistController();
         Session session = HibernateUtils.getSessionfactory().openSession();
-        String hql1 = "select distinct c from CDEntity as c order by d.albumGenre desc, limit (5)";
+        String hql1 = "select distinct c from CDEntity as c order by c.albumGenre desc";
         TypedQuery<CDEntity> query1 = session.createQuery(hql1, CDEntity.class);
-        ArrayList<CDEntity> cdEntities = (ArrayList<CDEntity>) query1.getResultList();
+        ArrayList<CDEntity> cdEntities = (ArrayList<CDEntity>) query1.setFirstResult(0).setMaxResults(10).getResultList();
         for (CDEntity temp : cdEntities) {
             logger.info(temp);
         }
 
-        String hql2 = "select distinct d from DVDEntity as d order by d.albumGenre desc, limit (5)";
+        String hql2 = "select distinct d from DVDEntity as d order by d.albumGenre desc";
         TypedQuery<DVDEntity> query2 = session.createQuery(hql2, DVDEntity.class);
-        ArrayList<DVDEntity> dvdEntities = (ArrayList<DVDEntity>) query2.getResultList();
+        ArrayList<DVDEntity> dvdEntities = (ArrayList<DVDEntity>) query2.setFirstResult(0).setMaxResults(10).getResultList();
         for (DVDEntity temp : dvdEntities) {
             logger.info(temp);
         }
 
-        String hql3 = "select distinct v from VinylEntity as v order by v.albumGenre desc, limit (5)";
+        String hql3 = "select distinct v from VinylEntity as v order by v.albumGenre desc";
         TypedQuery<VinylEntity> query3 = session.createQuery(hql3, VinylEntity.class);
-        ArrayList<VinylEntity> vinylEntities = (ArrayList<VinylEntity>) query3.getResultList();
+        ArrayList<VinylEntity> vinylEntities = (ArrayList<VinylEntity>) query3.setFirstResult(0).setMaxResults(10).getResultList();
         for (VinylEntity temp : vinylEntities) {
             logger.info(temp);
         }
