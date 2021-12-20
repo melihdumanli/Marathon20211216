@@ -69,6 +69,33 @@ public class UserCrudOperations {
         //userSignIn();
     }
 
+    public static void userLoginScreen() {
+        CustomerEntity customerEntity = LoginController.customerEntity;
+        Session session = HibernateUtils.getSessionfactory().openSession();
+        session.getTransaction().begin();
+
+        do {
+            System.out.println("\n\n\tKullanıcı adınızı giriniz:");
+            scanner.nextLine();
+            customerEntity.setUsername(scanner.nextLine());
+            System.out.println("\tŞifrenizi giriniz:");
+            customerEntity.setPassword(scanner.nextLine());
+
+        TypedQuery<CustomerEntity> query = session.createQuery("select c from CustomerEntity as c where username = :key1 and password = :key2", CustomerEntity.class);
+        query.setParameter("key1", customerEntity.getUsername());
+        query.setParameter("key2", customerEntity.getPassword());
+        try {
+            LoginController.customerEntity = query.getSingleResult();
+        } catch (Exception e) {
+                System.out.println("\n\n\tKullanıcı adı veya şifre hatalı");
+                System.out.println("\tLütfen tekrar deneyiniz");
+        }
+        } while (customerEntity.getId() == 0);
+        System.out.println("\n\n\tHoşgeldiniz " + customerEntity.getUsername());
+        scanner.close();
+        userPanel();
+    }
+
     public Boolean userSignIn(String username, String password) {
         //CustomerEntity customerEntity = LoginController.customerEntity;
         boolean isValid = false;

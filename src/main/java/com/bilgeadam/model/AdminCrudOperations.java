@@ -29,7 +29,7 @@ public class AdminCrudOperations {
     Scanner scanner = new Scanner(System.in);
     BAUtils baUtils = BAUtils.getInstance();
 
-    /*public void showMainMenu() {
+    public void showMainMenu() {
 
         int choice;
         do {
@@ -40,7 +40,7 @@ public class AdminCrudOperations {
         } while (choice < 0 || choice > 3);
 
         switch (choice) {
-            case 1 -> adminLoginScreen();
+            case 1 -> adminLogin();
             case 2 -> UserCrudOperations.userLoginScreen();
             case 3 -> {
                 System.out.println("Çıkış yapılıyor...");
@@ -48,8 +48,33 @@ public class AdminCrudOperations {
             }
             default -> throw new IllegalStateException("Unexpected value: " + choice);
         }
-        scanner.close();
-    }*/
+    }
+
+    private void adminLogin() {
+        Scanner scanner = new Scanner(System.in);
+        AdminEntity adminEntity = new AdminEntity();
+        adminEntity.setId(0);
+        Session session = HibernateUtils.getSessionfactory().openSession();
+
+        do {
+        System.out.println("\n\n\tKullanıcı adınızı giriniz:");
+        adminEntity.setUsername(scanner.nextLine());
+        System.out.println("\tŞifrenizi giriniz:");
+        adminEntity.setPassword(scanner.nextLine());
+
+        TypedQuery<AdminEntity> query = session.createQuery("select a from AdminEntity as a where username = :key1 and password = :key2", AdminEntity.class);
+        query.setParameter("key1", adminEntity.getUsername());
+        query.setParameter("key2", adminEntity.getPassword());
+        try {
+            adminEntity = query.getSingleResult();
+        }catch (Exception e){
+            System.out.println("\n\n\tKullanıcı adı veya şifre hatalı");
+            System.out.println("\tLütfen tekrar deneyiniz");
+        }
+        } while (adminEntity.getId() == 0);
+        System.out.println("\n\n\tHoşgeldiniz " + adminEntity.getUsername());
+        adminPanel();
+    }
 
     public Boolean adminLoginScreen(String username, String password) {
         //Scanner scanner = new Scanner(System.in);
