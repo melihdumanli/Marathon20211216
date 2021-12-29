@@ -1,4 +1,4 @@
-# Marathon-2 (Hibernate ORM)
+# Marathon-2 (Hibernate)
 This is a simple record store Java FX and console app.
 I used ORM (Hibernate and entity classes) to connect database, read and write datas. 
 I designed two different pages for admins and users(customers).
